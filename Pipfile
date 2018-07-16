@@ -12,8 +12,15 @@ black = "*"
 invoke = "*"
 flask-migrate = "*"
 flask-moment = "*"
+jwt = "*"
+requests = "*"
+python-dotenv = "*"
+flask-testing = "*"
+"nose2" = "*"
+coverage = "*"
 
 [dev-packages]
+pylint = "*"
 
 [requires]
 python_version = "3.6"

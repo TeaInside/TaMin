@@ -1,5 +1,26 @@
 {% extends '/layout/application.html' %}
 
 {% block content %}
-
+<a href="{{ url_for('ask.new') }}" class="button">Ask Question</a>
+<div class="bg">
+  {% for question in questions %}
+    <div class="row">
+      <strong><a href="{{ url_for('feedback.view', id=question.id) }}">{{ question.title }}</a></strong>
+      <div class="detail">
+        <div class="action-detail">
+          {% if question.is_solved %}
+          <span>Solved</span>
+          {% endif %}
+        </div>
+        <div class="feedback-detail">
+          <span>{{ question.answers.count() }} answers</span>
+        </div>
+        <div class="user-detail">
+          <span>asked {{ moment(question.created_at).fromNow() }}</span>
+          <span>by <a href="{{ question.user.html_url }}">{{ question.user.username }}</a></span>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
 {% endblock %}

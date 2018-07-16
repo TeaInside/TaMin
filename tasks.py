@@ -8,4 +8,9 @@ def server(ctx):
 
 @task
 def clean(ctx):
-    ctx.run("black src")
+    ctx.run("black src && black scripts")
+
+
+@task
+def test(ctx):
+    ctx.run("nose2 -v -C")

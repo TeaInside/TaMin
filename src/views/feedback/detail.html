@@ -1,0 +1,52 @@
+{% extends '/layout/application.html' %}
+
+{% block content %}
+{% if current_user.id == question.user_id %}
+<a href="{{ url_for('feedback.solve', id=question.id) }}" class="button">Mark Solved</a>
+{% endif %}
+  <div class="question">
+    <strong>{{ question.title }}</strong>
+    <hr>
+    {{ question.messages }}
+    <div class="detail">
+      <div></div>
+      <div></div>
+      <div class="user-detail">
+        <span>asked {{ moment(question.created_at).fromNow() }}</span>
+        <span>by <a href="{{ question.user.html_url }}">{{ question.user.username }}</a></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="feedback">
+    <strong>{{ question.answers.count() }} Answers</strong>
+  {% if answers %}
+    {% for answer in answers %}
+      <div class="answer">
+        {{ answer.messages }}
+        <div class="detail">
+          <div></div>
+          <div></div>
+          <div class="user-detail">
+            <span>answered {{ moment(answer.created_at).fromNow() }}</span>
+            <span>by <a href="{{ answer.user.html_url }}">{{ answer.user.username }}</a></span>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+  <hr>
+  <form action="" method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      <div class="form-comp">{{ form.messages.label }}</div>
+      <div class="form-comp">{{ form.messages(cols=80, rows=6, class="field") }}</div>
+      {% for error in form.messages.errors %}
+      <div class="error">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="form-comp">{{ form.submit(class="button") }}</div>
+  </form>
+  </div>
+{% endblock %}

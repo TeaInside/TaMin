@@ -1,0 +1,7 @@
+<strong>Solved Questions</strong>
+{% for question in get_trending_question() %}
+<div class="trending">
+  <div class="stat">{{ question.answers.count() }}</div>
+  <div class="title"><a href="{{ url_for('feedback.view', id=question.id) }}">{{ question.title }}</a></div>
+</div>
+{% endfor %}

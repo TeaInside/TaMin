@@ -1,0 +1,12 @@
+<div class="header">
+  <div class="leftheader">Left</div>
+  <div class="rightheader">
+    {% if current_user.is_anonymous %}
+    <a href="{{ url_for('auth.login') }}">login</a>
+    {% else %}
+    Hi, {{ current_user.username }}
+    |
+    <a href="{{ url_for('auth.logout') }}">logout</a>
+    {% endif %}
+  </div>
+</div>
